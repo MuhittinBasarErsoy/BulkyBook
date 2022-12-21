@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BulkyBook.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace BulkyBookWeb.Models.Data
+namespace BulkyBook.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -8,9 +9,9 @@ namespace BulkyBookWeb.Models.Data
         //update-database
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            
+
         }
 
-        public DbSet<Category> Categories { get; set; } 
+        public DbSet<Category> Categories { get; set; }
     }
 }
