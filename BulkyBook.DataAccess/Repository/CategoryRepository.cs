@@ -17,30 +17,6 @@ namespace BulkyBook.DataAccess.Repository
         {
             _db = db;
         }
-        public void Add(Category entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Category> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Category GetFirstOrDefault(Expression<Func<Category, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(Category entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveRange(IEnumerable<Category> entity)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Save()
         {
