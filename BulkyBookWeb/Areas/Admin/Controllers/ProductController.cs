@@ -55,53 +55,53 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                 //update product
             }
         }
-        //POST
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Upsert(ProductVM obj, IFormFile? file)
-        {
-            if (ModelState.IsValid)
-            {
-                string wwwRoothPath = _hostEnvironment.WebRootPath;
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Upsert(ProductVM obj, IFormFile? file)
+		{
 
-                if (file != null)
-                {
-                    string fileName = Guid.NewGuid().ToString();
-                    var uploads = Path.Combine(wwwRoothPath, @"images\products");
-                    var extension = Path.GetExtension(file.FileName);
+			if (ModelState.IsValid)
+			{
+				string wwwRootPath = _hostEnvironment.WebRootPath;
+				if (file != null)
+				{
+					string fileName = Guid.NewGuid().ToString();
+					var uploads = Path.Combine(wwwRootPath, @"images\products");
+					var extension = Path.GetExtension(file.FileName);
 
-                    if (obj.Product.ImageUrl != null)
-                    {
-                        var oldImagePath = Path.Combine(wwwRoothPath, obj.Product.ImageUrl.TrimStart('\\'));
-                        if (System.IO.File.Exists(oldImagePath))
-                        {
-                            System.IO.File.Delete(oldImagePath);
-                        }
-                    }
+					if (obj.Product.ImageUrl != null)
+					{
+						var oldImagePath = Path.Combine(wwwRootPath, obj.Product.ImageUrl.TrimStart('\\'));
+						if (System.IO.File.Exists(oldImagePath))
+						{
+							System.IO.File.Delete(oldImagePath);
+						}
+					}
 
-                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                    {
-                        file.CopyTo(fileStreams);
-                    }
-                    obj.Product.ImageUrl = @"images\products\" + fileName + extension;
-                }
-                if (obj.Product.Id == 0)
-                {
-                    _unitOfWork.Product.Add(obj.Product);
-                }
-                else
-                {
-                    _unitOfWork.Product.Update(obj.Product);
-                }
-                _unitOfWork.Save();
-                TempData["success"] = "Product created successfully";
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
+					using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+					{
+						file.CopyTo(fileStreams);
+					}
+					obj.Product.ImageUrl = @"\images\products\" + fileName + extension;
+
+				}
+				if (obj.Product.Id == 0)
+				{
+					_unitOfWork.Product.Add(obj.Product);
+				}
+				else
+				{
+					_unitOfWork.Product.Update(obj.Product);
+				}
+				_unitOfWork.Save();
+				TempData["success"] = "Product created successfully";
+				return RedirectToAction("Index");
+			}
+			return View(obj);
+		}
 
 
-        public IActionResult Delete(int? id)
+		public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
             {
