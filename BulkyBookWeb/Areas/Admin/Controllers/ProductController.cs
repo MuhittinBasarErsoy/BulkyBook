@@ -21,9 +21,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            //var objCategoryList = _db.Categories.ToList();
-            IEnumerable<CoverType> objCoverTypeList = _unitOfWork.CoverType.GetAll();
-            return View(objCoverTypeList);
+            return View();
         }
         //GET
         public IActionResult Upsert(int? id)
@@ -114,6 +112,14 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             return RedirectToAction("Index");
 
         }
+
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+
+        }
+        #endregion
 
     }
 }
