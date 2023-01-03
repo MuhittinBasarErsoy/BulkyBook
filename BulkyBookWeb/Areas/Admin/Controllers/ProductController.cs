@@ -117,7 +117,8 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-
+            var productList = _unitOfWork.Product.GetAll();
+            return Json(new {data=productList});
         }
         #endregion
 
